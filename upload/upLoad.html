@@ -1,0 +1,58 @@
+<div class="col-md-10 padding0">
+    <div class="col-md-12 mg-bottom-10">
+        <label for="{{fileId}}" class="btn btn-primary">选择文件</label>
+        <input type="file"
+               id="{{fileId}}"
+               class="file"
+               ng-model="img"
+               accept="image/gif,image/jpeg,image/png"
+               style="display: none;"
+               onchange="angular.element(this).scope().fileChanged(this)">
+    </div>
+    <div class="col-md-12">
+        <img alt="配图预览" ng-src="{{imageSrc}}" style="max-width:300px;" id="{{previewId}}">
+    </div>
+    <div class="col-md-12">
+        <div class="table-responsive col-md-8 padding0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-center">图片名</th>
+                    <th class="text-center">文件大小</th>
+                    <th class="text-center">进度</th>
+                    <th class="text-center">操作</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-show="isShow">
+                    <td class="text-center"><strong>{{fileName}}</strong></td>
+                    <td class="text-center">{{fileSize/1024/1024 | number:2}}MB</td>
+                    <td class="text-center">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div style="background-color: #337ab7;border-radius: 3px;"
+                                 ng-style="{'width': progress + '%'}"
+                                 ng-bind="progress+'%'"
+                                 class="progress-bar">
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span class="glyphicon glyphicon-ok" ng-show="okIcon"></span>
+                        <span class="glyphicon glyphicon-remove" ng-show="removeIcon"></span>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-success btn-xs" ng-click="upload()"
+                                ng-disabled="progress">
+                            <span class="glyphicon glyphicon-upload"></span>上传
+                        </button>
+                        <button class="btn btn-danger btn-xs" ng-click="delete()">
+                            <span class="glyphicon glyphicon-trash"></span>删除
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

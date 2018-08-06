@@ -1,0 +1,29 @@
+<div class="sidebar">
+    <div class="sidebar-list navbar-collapse collapse">
+        <ul>
+            <li class="first-level">
+                <a ui-sref="home.homePage" ng-click="toggleList()">
+                    <i class="glyphicon glyphicon-home icon"></i>
+                    欢迎页
+                </a>
+            </li>
+            <li class="first-level" ng-repeat="x in sidebarList">
+                <a ng-click="toggleList($index)" ng-class="{current: level_1 == $index}">
+                    <i class="glyphicon glyphicon-wrench icon"></i>
+                    {{x.moduleName}}
+                    <span class="glyphicon pull-right arrow"
+                          ng-class="(level_1 == $index) ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+                </a>
+                <ul class="second-level" ng-show="level_1 == $index">
+                    <li ng-repeat="y in x.nodes">
+                        <a ng-class="{active: level_2 == $index}"
+                           ng-click="currentList($index, $parent.$index)"
+                           ui-sref="{{y.moduleUrl}}">
+                            {{y.moduleName}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
